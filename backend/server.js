@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
+const productRoutes = require("./routes/productRoutes");
 const errorHandler = require("./middleware/errorMiddleware");
 const cookieParser = require("cookie-parser"); // Used to store generated JWT Token as a cookie in the browser
 
@@ -21,6 +22,7 @@ app.use(
 );
 // Routes middleware
 app.use("/api/users", userRoutes);
+app.use("/api/products", productRoutes);
 
 // Routes
 app.get("/", (req, res) => {
