@@ -3,12 +3,36 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const userRoutes = require("./routes/userRoutes");
+const errorHandler = require("./middleware/errorMiddleware");
+const cookieParser = require("cookie-parser"); // Used to store generated JWT Token as a cookie in the browser
 
 const app = express();
 
-const PORT = process.env.PORT || 5000;
+// Middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+  })
+);
+// Routes middleware
+app.use("/api/users", userRoutes);
+
+// Routes
+app.get("/", (req, res) => {
+  res.send("Home page");
+});
+
+// Error Middleware (Has to be after the routes!)
+app.use(errorHandler);
 
 // Connect DB and start server
+const PORT = process.env.PORT || 5000;
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
@@ -19,15 +43,3 @@ mongoose
   .catch((error) => {
     console.log(error.message);
   });
-
-// Middleware
-app.use(
-  cors({
-    origin: ["http://localhost:3000"],
-  })
-);
-
-// Routes
-app.get("/", (req, res) => {
-  res.send("Home page");
-});
