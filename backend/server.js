@@ -7,12 +7,13 @@ const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
 const errorHandler = require("./middleware/errorMiddleware");
 const cookieParser = require("cookie-parser"); // Used to store generated JWT Token as a cookie in the browser
+const path = require("path"); // Path for upload image folder
 
 const app = express();
 
 // Middlewares
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(
@@ -20,6 +21,7 @@ app.use(
     origin: ["http://localhost:3000"],
   })
 );
+app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // used for the upload image location
 // Routes middleware
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);

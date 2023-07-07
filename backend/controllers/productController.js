@@ -1,9 +1,10 @@
 const Product = require("../models/productModel");
 const asyncHandler = require("express-async-handler");
+const { fileSizeFormatter } = require("../utils/fileUpload");
 
 // Add product
 const addProduct = asyncHandler(async (req, res) => {
-  const { name, sku, category, price, quantity, image, description } = req.body;
+  const { name, sku, category, price, quantity, description } = req.body;
   const userId = req.user.id;
 
   // Validation
@@ -12,7 +13,17 @@ const addProduct = asyncHandler(async (req, res) => {
     throw new Error("All fields except image are required");
   }
 
-  // Manage Image upload
+  // Handle file upload
+  let fileData = {};
+  if (req.file) {
+    // Transform file size
+    fileData = {
+      fileName: req.file.originalname,
+      filePath: req.file.path,
+      fileType: req.file.mimetype,
+      fileSize: fileSizeFormatter(req.file.size, 2),
+    };
+  }
 
   // Write product to DB
   const product = await Product.create({
@@ -22,7 +33,7 @@ const addProduct = asyncHandler(async (req, res) => {
     category,
     price,
     quantity,
-    image,
+    image: fileData,
     description,
   });
   // Error if product not written
