@@ -77,12 +77,18 @@ const getProduct = asyncHandler(async (req, res) => {
 
 // Delete product
 const deleteProduct = asyncHandler(async (req, res) => {
-  const { _id } = req.params;
-  const product = await Product.findByIdAndDelete(_id);
+  const product = await Product.findById(req.params._id);
   if (!product) {
     res.status(400);
     throw new Error("Product not found");
   }
+  // Match product to its user
+  if (product.user.toString() !== req.user.id) {
+    res.status(400);
+    throw new Error("User not authorized");
+  }
+
+  await product.deleteOne();
   res.status(200).json({
     message: "Product deleted succesfully",
   });
@@ -90,6 +96,18 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
 // Update product
 const updateProduct = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params._id);
+  // Error if no product found
+  if (!product) {
+    res.status(400);
+    throw new Error("Product not found");
+  }
+  // Match product to its user
+  if (product.user.toString() !== req.user.id) {
+    res.status(400);
+    throw new Error("User not authorized");
+  }
+
   // Handle file upload
   let fileData = {};
   if (req.file) {
@@ -100,21 +118,15 @@ const updateProduct = asyncHandler(async (req, res) => {
       fileSize: fileSizeFormatter(req.file.size, 2), // Transform file size
     };
   }
-  const product = await Product.findById(req.body._id);
-  // Error if no product found
-  if (!product) {
-    res.status(400);
-    throw new Error("Product not found");
-  }
   // Update submitted fields
-  const { name, sku, category, price, quantity, description } = product;
+  const { name, category, price, quantity, description } = product;
   product.name = req.body.name || name;
-  product.sku = req.body.sku || sku;
   product.category = req.body.category || category;
   product.price = req.body.price || price;
   product.quantity = req.body.quantity || quantity;
   product.description = req.body.description || description;
-  product.image = fileData || image;
+  product.image =
+    Object.keys(fileData).length === 0 ? product?.image : fileData;
 
   const updatedProduct = await product.save();
   if (!updatedProduct) {

@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
+const contactRoutes = require("./routes/contactRoutes");
 const errorHandler = require("./middleware/errorMiddleware");
 const cookieParser = require("cookie-parser"); // Used to store generated JWT Token as a cookie in the browser
 const path = require("path"); // Path for upload image folder
@@ -25,6 +26,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // used fo
 // Routes middleware
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/contacts", contactRoutes);
 
 // Routes
 app.get("/", (req, res) => {

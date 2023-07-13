@@ -16,6 +16,11 @@ router.post("/addproduct", protect, upload.single("image"), addProduct);
 router.get("/", protect, getProducts);
 router.get("/product/:_id", protect, getProduct);
 router.delete("/deleteproduct/:_id", protect, deleteProduct);
-router.put("/updateproduct", protect, upload.single("image"), updateProduct);
+router.put(
+  "/updateproduct/:_id",
+  protect,
+  upload.single("image"),
+  updateProduct
+);
 
 module.exports = router;
