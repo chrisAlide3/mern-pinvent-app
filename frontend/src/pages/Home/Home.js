@@ -10,7 +10,11 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <Box>
+    <Box
+      pl={3}
+      pr={3}
+      sx={{ backgroundColor: "darkblue", color: "white", height: "100vh" }}
+    >
       <AppBar
         position="static"
         elevation={0}
@@ -79,7 +83,7 @@ const Home = () => {
         <Chip
           label="Free Trial 1 Month"
           variant="outlined"
-          sx={{ border: "1px solid", borderRadius: "2px" }}
+          sx={{ border: "1px solid", borderRadius: "2px", color: "white" }}
         />
         <Box sx={{ display: "flex" }}>
           <Typography mt={4} mr={8} variant="h4" gutterBottom>
