@@ -6,6 +6,7 @@ import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import Forgot from "./pages/auth/Forgot";
 import Reset from "./pages/auth/Reset";
+import Dashboard from "./pages/dashboard/Dashboard";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/forgot" element={<Forgot />} />
             <Route path="/resetpassword/:resetToken" element={<Reset />} />
+            <Route path="/cockpit" element={<Dashboard />} />
           </Routes>
         </BrowserRouter>
       </Container>
