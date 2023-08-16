@@ -29,7 +29,7 @@ const Register = () => {
                 required
                 fullWidth
                 autoFocus
-                variant="outlined"
+                variant="filled"
                 margin="normal"
               />
               <TextField
@@ -59,7 +59,7 @@ const Register = () => {
                 label="Confirm Password"
                 required
                 fullWidth
-                variant="outlined"
+                variant="filled"
               />
             </Box>
           </CardContent>

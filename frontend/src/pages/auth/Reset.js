@@ -28,7 +28,7 @@ const Reset = () => {
               type="password"
               name="newPassword"
               label="New Password"
-              variant="outlined"
+              variant="filled"
               fullWidth
               required
               autoFocus
@@ -39,7 +39,7 @@ const Reset = () => {
               type="password"
               name="password"
               label="Confirm New Password"
-              variant="outlined"
+              variant="filled"
               fullWidth
               required
             />
