@@ -56,9 +56,9 @@ const Home = () => {
               variant="text"
               color="inherit"
               component={Link}
-              to="/cockpit"
+              to="/dashboard"
             >
-              Cockpit
+              Dashboard
             </Button>
           </Box>
         </Toolbar>

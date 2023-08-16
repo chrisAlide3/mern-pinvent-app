@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import LoginIcon from "@mui/icons-material/Login";
 import TextField from "@mui/material/TextField";
 
-const Login = () => {
+const Login = ({ children }) => {
   return (
     <Container maxWidth="sm" sx={{ paddingTop: "100px" }}>
       <Card variant="outlined">

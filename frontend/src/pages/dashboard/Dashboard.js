@@ -1,12 +1,12 @@
 import React from "react";
 import Layout from "../../components/layout/Layout";
 
-const Cockpit = () => {
+const Dashboard = () => {
   return (
     <Layout>
-      <div>Cockpit</div>
+      <div>Dashboard</div>
     </Layout>
   );
 };
 
-export default Cockpit;
+export default Dashboard;
