@@ -6,7 +6,9 @@ import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import Forgot from "./pages/auth/Forgot";
 import Reset from "./pages/auth/Reset";
+import SidebarLayout from "./components/layout/SidebarLayout";
 import Dashboard from "./pages/dashboard/Dashboard";
+import AddProduct from "./pages/products/AddProduct";
 
 function App() {
   return (
@@ -19,7 +21,24 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/forgot" element={<Forgot />} />
             <Route path="/resetpassword/:resetToken" element={<Reset />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+
+            <Route
+              path="/dashboard"
+              element={
+                <SidebarLayout>
+                  <Dashboard />
+                </SidebarLayout>
+              }
+            />
+
+            <Route
+              path="/addproduct"
+              element={
+                <SidebarLayout>
+                  <AddProduct />
+                </SidebarLayout>
+              }
+            />
           </Routes>
         </BrowserRouter>
       </Container>

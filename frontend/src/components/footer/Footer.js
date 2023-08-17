@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 
 const Footer = () => {
   return (
-    <Box sx={{ alignContent: "center" }}>
+    <Box sx={{ textAlign: "center" }}>
       <Typography variant="caption">
         All Rights Reserved. &copy; 2023
       </Typography>
