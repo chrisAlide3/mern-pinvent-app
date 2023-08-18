@@ -26,7 +26,6 @@ const drawerWidth = 240;
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
     flexGrow: 1,
-    minHeight: "60vh",
     padding: theme.spacing(3),
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
@@ -177,7 +176,9 @@ export default function PersistentDrawerLeft({ children }) {
       <Main open={open}>
         <DrawerHeader />
         {children}
-        <Footer />
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Footer />
+        </Box>
       </Main>
     </Box>
   );
